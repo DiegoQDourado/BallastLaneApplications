@@ -1,4 +1,4 @@
-## **User Story**
+### **User Story**
 
 **Title**: User Account Management and Product CRUD Operations with Role-Based Authorization
 
@@ -147,3 +147,32 @@
 - **JWT Authentication**: Protect endpoints using **JWT tokens**. The token will be passed in the Authorization header of requests to authenticate the user.
 - **Role-based Authorization**: Only users with the **admin role** can perform certain operations such as **create**, **update**, and **delete** products.
 
+---
+### **Deploy Considerations:**
+1. **Deploy**
+
+    To deploy this project acces the project folder 
+    
+    ```bash
+      project-folder/
+    ```
+    Then run:
+    
+    ```bash
+      docker-compose up -d
+    ```
+
+2. **Environment Variables**
+
+     `ConnectionStrings__DefaultConnection`
+     
+     `Jwt__SecretKey`
+     
+     `Jwt__TokenValidityInMinutes`      
+
+3. **Running locally**
+    Use postman for tests, just export the collection
+    
+    ```bash
+      project-folder/postman_collection/ExerciseV3.postman_collection.json
+    ```
