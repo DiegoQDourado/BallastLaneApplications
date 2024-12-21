@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/4a963169-42f5-4b0e-9873-746c5f3cccc9)
+
 ### **User Story**
 
 **Title**: User Account Management and Product CRUD Operations with Role-Based Authorization
@@ -151,7 +153,7 @@
 ### **Deploy Considerations:**
 1. **Deploy**
 
-    To deploy this project acces the project folder 
+   **_To deploy this project access the project folder:_** 
     
     ```bash
       project-folder/
@@ -161,17 +163,16 @@
     ```bash
       docker-compose up -d
     ```
+3. **Environment Variables**
 
-2. **Environment Variables**
-
-     `ConnectionStrings__DefaultConnection`
+    - `ConnectionStrings__DefaultConnection`
      
-     `Jwt__SecretKey`
+    - `Jwt__SecretKey`
      
-     `Jwt__TokenValidityInMinutes`      
+    - `Jwt__TokenValidityInMinutes`   
+4. **Running locally**
 
-3. **Running locally**
-    Use postman for tests, just export the collection
+    **_Use postman for tests, just export the collection:_**
     
     ```bash
       project-folder/postman_collection/ExerciseV3.postman_collection.json
