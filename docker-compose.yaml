@@ -1,0 +1,59 @@
+﻿version: "3.3"
+
+services:
+
+    api-product:
+      build:        
+       dockerfile: Dockerfile_Product
+      environment:       
+        - ConnectionStrings__DefaultConnection=Server=sqlserver-exercise,1433;Database=Exercisev3;User Id=sa;Password=@SqlServer123!;TrustServerCertificate=True;            
+        - Jwt__SecretKey=@@My@@Secret@@KeyForSecurityToken!!24@
+        - Jwt__TokenValidityInMinutes=90        
+      networks:        
+        - backend    
+      ports: 
+        - "8083:8080"
+      depends_on:      
+        - sqlserver-exercise 
+
+    api-auth:
+          build:            
+           dockerfile: Dockerfile_Auth
+          environment:       
+            - ConnectionStrings__DefaultConnection=Server=sqlserver-exercise,1433;Database=Exercisev3;User Id=sa;Password=@SqlServer123!;TrustServerCertificate=True;            
+            - Jwt__SecretKey=@@My@@Secret@@KeyForSecurityToken!!24@                   
+          networks:        
+            - backend    
+          ports: 
+            - "8082:8080"
+          depends_on:      
+            - sqlserver-exercise        
+
+    sqlserver-exercise:
+         image: mcr.microsoft.com/mssql/server:2019-latest
+         volumes:
+            - ./initSql:/init-sql
+         environment:
+            SA_PASSWORD: "@SqlServer123!"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Developer"
+         ports:
+            - "1433:1433"
+         networks:
+            - backend
+         command: >
+          /bin/bash -c "
+          /opt/mssql/bin/sqlservr &
+          sleep 30 &&
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P @SqlServer123! -i init-sql/initSql.sql &&
+          tail -f /dev/null"        
+volumes:
+   esdata:
+     driver: local
+
+networks:
+  backend:
+    driver: bridge
+  external:
+    driver: overlay
+    attachable: true

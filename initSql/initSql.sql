@@ -1,0 +1,24 @@
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'ExerciseV3')
+BEGIN
+    CREATE DATABASE ExerciseV3;
+END;
+
+GO
+
+USE ExerciseV3;
+
+GO
+
+CREATE TABLE Products (
+    Id UNIQUEIDENTIFIER  PRIMARY KEY,
+    Name NVARCHAR(100),
+    Description NVARCHAR(255),
+    Price DECIMAL(18,2)
+);
+
+CREATE TABLE Users (
+    Id UNIQUEIDENTIFIER PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(500) NOT NULL,
+    Roles VARCHAR(20) NOT NULL
+);
